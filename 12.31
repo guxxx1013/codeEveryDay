@@ -1,0 +1,30 @@
+Question:
+2. 给一个integer,  返回最大的siblings （siblings 定义为 组成这个数的数字的其他排列） 例如 355 的siblings 包含 553 535 最大的返回 553
+每一位hash到count 数组[0- 9]记录频率， 最后从后向前扫数组，
+比如 553
+[0,0,0,1,0,2,0,0,0,0].鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+那么就是 5*10* 10 + 3 = 553
+
+import java.util.*;
+public class Solution {
+  public static void main(String[] args) {
+    System.out.println("Hello World");
+  }
+
+  public int siblings(Integer num) {
+    int result = 0;
+    int count[] = new int[10];
+    while(num != 0) {
+      int key = num % 10;
+      num /= 10;
+      count[key]++;
+    }
+    for (int i = 9; i >= 0; i--) {
+      while(count[i] != 0) {
+        result = 10 * result + i;
+        count[i]--;
+      }
+    }
+    return result;
+  }
+}
