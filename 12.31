@@ -1,5 +1,6 @@
 Question:
-2. 给一个integer,  返回最大的siblings （siblings 定义为 组成这个数的数字的其他排列） 例如 355 的siblings 包含 553 535 最大的返回 553
+2. 给一个integer,  返回最大的siblings （siblings 定义为 组成这个数的数字的其他排列）
+例如 355 的siblings 包含 553 535 最大的返回 553
 每一位hash到count 数组[0- 9]记录频率， 最后从后向前扫数组，
 比如 553
 [0,0,0,1,0,2,0,0,0,0].鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
@@ -26,5 +27,43 @@ public class Solution {
       }
     }
     return result;
+  }
+}
+
+最长递增子序列的起始index(Longest Ascending Subarray):
+import java.util.*;
+public class Solution {
+  public static void main(String[] args) {
+    System.out.println("Hello World");
+    Solution test = new Solution();
+    int[] nums = {7, 2, 3, 1, 5, 8, 9, 6};
+    int result = test.longSequence(nums);
+    System.out.println(result);
+  }
+
+  public int longSequence(int[] nums) {
+    if (nums == null || nums.length == 0) {
+      return 0;
+    }
+    int max = 1;
+    int index = 0;
+    int n = nums.length;
+    int[] dp = new int[n];
+    //base case;
+    dp[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+      if (nums[i + 1] > nums[i]) {
+        dp[i + 1] = dp[i] + 1;
+      } else {
+        dp[i + 1] = 1;
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      if(dp[i] > max) {
+        max = dp[i];
+        index = i;
+      }
+    }
+    return index - max + 1;
   }
 }
