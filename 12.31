@@ -67,3 +67,65 @@ public class Solution {
     return index - max + 1;
   }
 }
+
+Count ways to express a number as sum of consecutive numbers:
+public class Solution {
+  public static void main(String[] args) {
+
+  }
+
+  public static int countConsecutive(int N) {
+    if (N <= 0) {
+      return 0;
+    }
+    int count = 0;
+    for (int L = 1; L * (L + 1) < 2 * N; L++) { //!!!!!!start 1 here
+      float a = (float) (1.0 * N - (L * (L + 1) / 2)) / (L + 1);
+      if (a - int(a) == 0) {
+        count++;
+      }
+    }
+    return count;
+  }
+}
+
+2.3
+class ListNode {
+   public int value;
+   public ListNode next;
+   public ListNode(int value) {
+     this.value = value;
+     next = null;
+   }
+}
+
+public class Solution {
+  public ListNode reverse(ListNode head) {
+    // write your solution here
+    //head = recursion(head);
+    head = iterative(head);
+    return head;
+  }
+
+  private ListNode recursion(ListNode head) {
+    if (head == null || head.next == null) {
+    	return head;
+    }
+  	ListNode newHead = recursion(head.next);
+    head.next.next = head;
+    head.next = null;
+    return newHead;
+  }
+
+  private ListNode iterative(ListNode head) {
+  	ListNode pre = null;
+    while(head != null) {
+    	ListNode next = head.next;
+    	head.next = pre;
+    	pre = head;
+      head = next;
+    }
+    return pre;
+  }
+
+}
